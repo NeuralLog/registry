@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  registry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neurallog/registry:latest
+    container_name: neurallog-registry
+    ports:
+      - "3031:3031"
+    environment:
+      - PORT=3031
+      - TENANT_ID=test-tenant
+      - BASE_DOMAIN=localhost
+      - AUTH_URL=http://localhost:3001
+      - SERVER_URL=http://localhost:3030
+      - WEB_URL=http://localhost:3000
+      - API_VERSION=v1
+      - LOG_LEVEL=debug
+    volumes:
+      - ./src:/app/src
+    networks:
+      - neurallog-network
+
+networks:
+  neurallog-network:
+    name: neurallog-registry-network
+    driver: bridge
