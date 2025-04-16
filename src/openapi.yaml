@@ -1,0 +1,121 @@
+openapi: 3.0.0
+info:
+  title: NeuralLog Registry API
+  description: API for service discovery in NeuralLog
+  version: 1.0.0
+  contact:
+    name: NeuralLog Team
+servers:
+  - url: /
+    description: Registry API
+paths:
+  /endpoints:
+    get:
+      tags:
+        - Endpoints
+      summary: Get service endpoints
+      description: Get the service endpoints for a tenant
+      parameters:
+        - in: query
+          name: tenant
+          schema:
+            type: string
+          required: false
+          description: Tenant ID (if not provided, uses the tenant ID from the registry configuration)
+      responses:
+        '200':
+          description: Service endpoints
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndpointResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Get health status
+      description: Get the health status of the registry
+      responses:
+        '200':
+          description: Health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    EndpointResponse:
+      type: object
+      required:
+        - tenantId
+        - authUrl
+        - serverUrl
+        - webUrl
+        - apiVersion
+      properties:
+        tenantId:
+          type: string
+          description: Tenant ID
+          example: tenant-name
+        authUrl:
+          type: string
+          description: Auth service URL
+          example: https://auth.tenant-name.neurallog.app
+        serverUrl:
+          type: string
+          description: Server URL
+          example: https://api.tenant-name.neurallog.app
+        webUrl:
+          type: string
+          description: Web URL
+          example: https://tenant-name.neurallog.app
+        apiVersion:
+          type: string
+          description: API version
+          example: v1
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - tenantId
+      properties:
+        status:
+          type: string
+          description: Health status
+          example: ok
+        tenantId:
+          type: string
+          description: Tenant ID
+          example: tenant-name
+    Error:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          description: Error status
+          example: error
+        message:
+          type: string
+          description: Error message
+          example: An error occurred

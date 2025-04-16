@@ -178,3 +178,29 @@ You can run the provided test script to verify the registry integration:
 # In the typescript-client-sdk directory
 ./test-registry.ps1
 ```
+
+## Documentation
+
+Detailed documentation is available in the [docs](./docs) directory:
+
+- [API Reference](./docs/api.md)
+- [Configuration](./docs/configuration.md)
+- [Architecture](./docs/architecture.md)
+- [Examples](./docs/examples)
+
+For integration guides and tutorials, visit the [NeuralLog Documentation Site](https://neurallog.github.io/docs/).
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## Related NeuralLog Components
+
+- [NeuralLog Auth](https://github.com/NeuralLog/auth) - Authentication and authorization
+- [NeuralLog Server](https://github.com/NeuralLog/server) - Core server functionality
+- [NeuralLog Web](https://github.com/NeuralLog/web) - Web interface components
+- [NeuralLog TypeScript Client SDK](https://github.com/NeuralLog/typescript-client-sdk) - TypeScript client SDK
+
+## License
+
+MIT
